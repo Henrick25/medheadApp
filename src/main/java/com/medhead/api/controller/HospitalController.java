@@ -17,6 +17,8 @@ import com.medhead.api.service.HospitalService;
 public class HospitalController {
 	  @Autowired
 	    private HospitalService hospitalService;
+	  
+	
 
 	    @GetMapping("/api/hospitals")
 	    public ResponseEntity<Hospital> getNearestHospital(@RequestParam String specialty,  @RequestParam("latitude") double latitude,
@@ -29,7 +31,7 @@ public class HospitalController {
 	        }
 	    }
 	    
-	    @GetMapping("/api/hospital")
+	    @GetMapping("admin/api/hospital")
 	    public ResponseEntity<List<Hospital>> getAllHospital() {
 	    	
 	        List<Hospital> hospital = hospitalService.findAllHospital();
