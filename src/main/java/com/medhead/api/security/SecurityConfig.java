@@ -25,7 +25,7 @@ public class SecurityConfig {
 				auth.requestMatchers("/admin").hasRole("ADMIN");
 				auth.requestMatchers("/user").hasRole("USER");
 				auth.anyRequest().authenticated();
-			}).formLogin(Customizer.withDefaults()).build();
+			}).httpBasic(Customizer.withDefaults()).build();
 		}
 		
 		@Bean

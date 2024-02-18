@@ -21,9 +21,9 @@ public class HospitalController {
 	
 
 	    @GetMapping("/api/hospitals")
-	    public ResponseEntity<Hospital> getNearestHospital(@RequestParam String specialty,  @RequestParam("latitude") double latitude,
+	    public ResponseEntity< List   <Hospital>> getNearestHospital(@RequestParam String specialty,  @RequestParam("latitude") double latitude,
 	            @RequestParam("longitude") double longitude) {
-	        Hospital hospital = hospitalService.findNearestHospital(specialty, latitude, longitude);
+	      List   <Hospital> hospital = hospitalService.findNearestHospital(specialty, latitude, longitude);
 	        if (hospital != null) {
 	            return new ResponseEntity<>(hospital, HttpStatus.OK);
 	        } else {

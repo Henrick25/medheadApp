@@ -22,8 +22,8 @@ public class Specialization {
     private Long id;
     private String name;
 
-    @ManyToMany(mappedBy = "specializations", fetch = FetchType.LAZY)
-    private Set<Hospital> hospitals = new HashSet<>();
+//    @ManyToMany(mappedBy = "specializations", fetch = FetchType.LAZY)
+ //   private Set<Hospital> hospitals = new HashSet<>();
 
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -37,14 +37,14 @@ public class Specialization {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Set<Hospital> getHospitals() {
-		return hospitals;
-	}
-
-	public void setHospitals(Set<Hospital> hospitals) {
-		this.hospitals = hospitals;
-	}
+//
+//	public Set<Hospital> getHospitals() {
+//		return hospitals;
+//	}
+//
+//	public void setHospitals(Set<Hospital> hospitals) {
+//		this.hospitals = hospitals;
+//	}
 
 	public void setName(String name) {
 		this.name = name;

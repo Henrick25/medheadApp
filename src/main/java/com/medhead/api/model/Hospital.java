@@ -3,11 +3,13 @@ package com.medhead.api.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -16,27 +18,43 @@ import lombok.Data;
 @Entity
 @Table(name= "hospital")
 public class Hospital {
-	@Id
+	
+	
+
+  @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 255)
     private String name;
-    private int availableBeds;
-    private String location; // Simplifié pour cet exemple; considérez utiliser un type plus complexe pour la géolocalisation.
-    private double latitude;
-    private double longitude;
-    @ManyToMany(fetch = FetchType.LAZY)
+
+    @Column(nullable = true)
+    private Double latitude;
+
+    @Column(nullable = true)
+    private Double longitude;
+
+    
+    //private Long bed;
+    
+//	@ManyToMany
+//    @JoinTable(
+//      name = "hospitalSpecialization",
+//      joinColumns = @JoinColumn(name = "hospital_id"),
+//      inverseJoinColumns = @JoinColumn(name = "specialization_id")
+//    )
  
-    private Set<Specialization> specializations = new HashSet<>();
+ //   private Set<Specialization> specializations = new HashSet<>();
 
     // Getters et setters
 
-    public Set<Specialization> getSpecializations() {
-        return specializations;
-    }
-
-    public void setSpecializations(Set<Specialization> specializations) {
-        this.specializations = specializations;
-    }
+//    public Set<Specialization> getSpecializations() {
+//        return specializations;
+//    }
+//
+//    public void setSpecializations(Set<Specialization> specializations) {
+//        this.specializations = specializations;
+//    }
 
 	public Long getId() {
 		return id;
@@ -54,37 +72,27 @@ public class Hospital {
 		this.name = name;
 	}
 
-	public int getAvailableBeds() {
-		return availableBeds;
-	}
-
-	public void setAvailableBeds(int availableBeds) {
-		this.availableBeds = availableBeds;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public double getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public double getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
+	/*
+	 * public Long getBed() { return bed; }
+	 * 
+	 * public void setBed(Long bed) { this.bed = bed; }
+	 */
+
     
     
 }
