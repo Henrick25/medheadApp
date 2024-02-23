@@ -21,14 +21,15 @@ public class HospitalController {
 	
 
 	    @GetMapping("/api/hospitals")
-	    public ResponseEntity< List   <Hospital>> getNearestHospital(@RequestParam String specialty,  @RequestParam("latitude") double latitude,
+	    public ResponseEntity getNearestHospital(@RequestParam String specialty,  @RequestParam("latitude") double latitude,
 	            @RequestParam("longitude") double longitude) {
-	      List   <Hospital> hospital = hospitalService.findNearestHospital(specialty, latitude, longitude);
-	        if (hospital != null) {
-	            return new ResponseEntity<>(hospital, HttpStatus.OK);
-	        } else {
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	        }
+	    	 try {
+	    	        Hospital hospital = hospitalService.findNearestHospital(specialty, latitude, longitude);
+	    	        return new ResponseEntity<>(hospital, HttpStatus.OK);
+	    	    } catch (Exception e) {
+	    	        // Gérer l'exception ou logger l'erreur
+	    	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    	    }
 	    }
 	    
 	    @GetMapping("admin/api/hospital")

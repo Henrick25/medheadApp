@@ -16,83 +16,115 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name= "hospital")
+@Table(name = "hospital")
 public class Hospital {
 	
 	
+	 	@Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+	  
+	    @Column(name = "name", nullable = false, length = 255)
+	    private String name;
 
-  @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	    @Column(name = "latitude", nullable = true)
+	    private Double latitude;
 
-    @Column(nullable = false, length = 255)
-    private String name;
+	    @Column(name = "longitude", nullable = true)
+	    private Double longitude;
+	    
+	    
+	    @Column(name = "lit", nullable = true)
+	    private Long lit;
+	    
+	   @Column(name = "numeroderue", nullable = true, length = 10)
+	    private String numeroDeRue;
+	    
+	  @Column(name = "nomdelarue", nullable = true)
+	   private String rue;
 
-    @Column(nullable = true)
-    private Double latitude;
+	  
 
-    @Column(nullable = true)
-    private Double longitude;
+	    
+	    @Column(name = "postal", nullable = true, length = 10)
+	    private String postal;
 
-    
-    //private Long bed;
-    
-//	@ManyToMany
-//    @JoinTable(
-//      name = "hospitalSpecialization",
-//      joinColumns = @JoinColumn(name = "hospital_id"),
-//      inverseJoinColumns = @JoinColumn(name = "specialization_id")
-//    )
- 
- //   private Set<Specialization> specializations = new HashSet<>();
+		@ManyToMany
+		@JoinTable(
+			name = "hospitalSpecialization",
+	      joinColumns = @JoinColumn(name = "hospital_id"),
+	      inverseJoinColumns = @JoinColumn(name = "specialization_id")
+	    )
+	 
+	    private Set<Specialization> specializations = new HashSet<>();
 
-    // Getters et setters
+		public Long getId() {
+			return id;
+		}
 
-//    public Set<Specialization> getSpecializations() {
-//        return specializations;
-//    }
-//
-//    public void setSpecializations(Set<Specialization> specializations) {
-//        this.specializations = specializations;
-//    }
+		public void setId(Long id) {
+			this.id = id;
+		}
 
-	public Long getId() {
-		return id;
-	}
+		public String getName() {
+			return name;
+		}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+		public void setName(String name) {
+			this.name = name;
+		}
 
-	public String getName() {
-		return name;
-	}
+		public Double getLatitude() {
+			return latitude;
+		}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+		public void setLatitude(Double latitude) {
+			this.latitude = latitude;
+		}
 
-	public Double getLatitude() {
-		return latitude;
-	}
+		public Double getLongitude() {
+			return longitude;
+		}
 
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
+		public void setLongitude(Double longitude) {
+			this.longitude = longitude;
+		}
 
-	public Double getLongitude() {
-		return longitude;
-	}
+		public Long getLit() {
+			return lit;
+		}
 
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-	/*
-	 * public Long getBed() { return bed; }
-	 * 
-	 * public void setBed(Long bed) { this.bed = bed; }
-	 */
+		public void setLit(Long lit) {
+			this.lit = lit;
+		}
 
+		public String getNumeroDeRue() {
+			return numeroDeRue;
+		}
+
+		public void setNumeroDeRue(String numeroDeRue) {
+			this.numeroDeRue = numeroDeRue;
+		}
+
+		public String getRue() {
+			return rue;
+		}
+
+		public void setRue(String rue) {
+			this.rue = rue;
+		}
+
+		public String getPostal() {
+			return postal;
+		}
+
+		public void setPostal(String postal) {
+			this.postal = postal;
+		}
+
+		
+	  
+	    
     
     
 }
