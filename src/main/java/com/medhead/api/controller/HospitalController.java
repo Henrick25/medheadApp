@@ -20,11 +20,17 @@ public class HospitalController {
 	  
 	
 
-	    @GetMapping("/api/hospitals")
+	    @GetMapping("/api/hospital")
 	    public ResponseEntity getNearestHospital(@RequestParam String specialty,  @RequestParam("latitude") double latitude,
 	            @RequestParam("longitude") double longitude) {
 	    	 try {
 	    	        Hospital hospital = hospitalService.findNearestHospital(specialty, latitude, longitude);
+	    	        if (hospital == null) {
+	    	        	
+	    	            // Aucun hôpital trouvé, retourner une réponse indiquant que la ressource n'est pas trouvée
+	    	            return new ResponseEntity<>("Les urgences sont saturées, il n'y a actuellement plus de place disponible pour cette spécialité. Veuillez réitérer votre demande d'ici 30 minutes.", HttpStatus.NOT_FOUND);
+	    	        }
+
 	    	        return new ResponseEntity<>(hospital, HttpStatus.OK);
 	    	    } catch (Exception e) {
 	    	        // Gérer l'exception ou logger l'erreur
