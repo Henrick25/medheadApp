@@ -6,7 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "groupes_specialites")
 public class GroupeSpecialite {
@@ -19,5 +23,22 @@ public class GroupeSpecialite {
     @Column(name = "nom_groupe", nullable = false, length = 255)
     private String nomGroupe;
 
+	public Integer getIdGroupe() {
+		return idGroupe;
+	}
+
+	public void setIdGroupe(Integer idGroupe) {
+		this.idGroupe = idGroupe;
+	}
+
+	public String getNomGroupe() {
+		return nomGroupe;
+	}
+
+	public void setNomGroupe(String nomGroupe) {
+		this.nomGroupe = nomGroupe;
+	}
+
     // Constructors, getters and setters
+    
 }

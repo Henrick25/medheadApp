@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.medhead.api.dto.HospitalDTO;
+import com.medhead.api.mapper.HospitalMapper;
 import com.medhead.api.model.Hospital;
 import com.medhead.api.service.HospitalService;
 
@@ -19,23 +21,26 @@ public class HospitalController {
 	    private HospitalService hospitalService;
 	  
 	
+	  public HospitalController(HospitalService hospitalService) {
+	        this.hospitalService = hospitalService;
+	    }
+	  @GetMapping("/api/hospital")
+	    public ResponseEntity<?> getNearestHospital(@RequestParam String specialty, @RequestParam("latitude") double latitude,
+	                                                @RequestParam("longitude") double longitude) {
+	        try {
+	            Hospital hospital = hospitalService.findNearestHospital(specialty, latitude, longitude);
+	            if (hospital == null) {
+	                return new ResponseEntity<>("Les urgences sont saturées, il n'y a actuellement plus de place disponible pour cette spécialité. Veuillez réitérer votre demande d'ici 30 minutes.", HttpStatus.NOT_FOUND);
+	            }
 
-	    @GetMapping("/api/hospital")
-	    public ResponseEntity getNearestHospital(@RequestParam String specialty,  @RequestParam("latitude") double latitude,
-	            @RequestParam("longitude") double longitude) {
-	    	 try {
-	    	        Hospital hospital = hospitalService.findNearestHospital(specialty, latitude, longitude);
-	    	        if (hospital == null) {
-	    	        	
-	    	            // Aucun hôpital trouvé, retourner une réponse indiquant que la ressource n'est pas trouvée
-	    	            return new ResponseEntity<>("Les urgences sont saturées, il n'y a actuellement plus de place disponible pour cette spécialité. Veuillez réitérer votre demande d'ici 30 minutes.", HttpStatus.NOT_FOUND);
-	    	        }
+	            // Conversion de l'entité Hospital en HospitalDTO
+	            HospitalDTO hospitalDTO = HospitalDTO.convertToDTO(hospital); // Cette méthode doit être implémentée
 
-	    	        return new ResponseEntity<>(hospital, HttpStatus.OK);
-	    	    } catch (Exception e) {
-	    	        // Gérer l'exception ou logger l'erreur
-	    	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    	    }
+	            return new ResponseEntity<>(hospitalDTO, HttpStatus.OK);
+	        } catch (Exception e) {
+	            // Gérer l'exception ou logger l'erreur
+	            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
 	    }
 	    
 	    @GetMapping("admin/api/hospital")

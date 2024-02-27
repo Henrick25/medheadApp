@@ -16,8 +16,7 @@ public class HospitalService {
     private HospitalRepository hospitalRepository;
 	@Transactional
     public Hospital findNearestHospital(String specialty, double patientLatitude, double patientLongitude) {
-        // Implémentez la logique pour trouver l'hôpital le plus proche avec la spécialité requise.
-        // Ceci est un exemple simplifié.
+       
     	
     	Hospital hospitals = hospitalRepository.find_nearest_hospital(specialty ,patientLatitude,patientLongitude  );
         return hospitals;

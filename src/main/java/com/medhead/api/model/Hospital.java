@@ -58,6 +58,14 @@ public class Hospital {
 	 
 	    private Set<Specialization> specializations = new HashSet<>();
 
+		public Set<Specialization> getSpecializations() {
+			return specializations;
+		}
+
+		public void setSpecializations(Set<Specialization> specializations) {
+			this.specializations = specializations;
+		}
+
 		public Long getId() {
 			return id;
 		}
