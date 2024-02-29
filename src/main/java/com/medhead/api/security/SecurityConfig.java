@@ -18,18 +18,18 @@ public class SecurityConfig {
 	@Configuration
 	@EnableWebSecurity
 	public class SpringSecurityConfig {
-		
-		@Bean
-		public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        @Bean
+        SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 			return http.authorizeHttpRequests(auth -> {
 				auth.requestMatchers("/admin").hasRole("ADMIN");
 				auth.requestMatchers("/user").hasRole("USER");
 				auth.anyRequest().authenticated();
 			}).httpBasic(Customizer.withDefaults()).build();
 		}
-		
-		@Bean
-		public UserDetailsService users() {
+
+        @Bean
+        UserDetailsService users() {
 			UserDetails user = User.builder()
 					.username("user")
 					.password(passwordEncoder().encode("user"))
@@ -40,9 +40,9 @@ public class SecurityConfig {
 					.roles("USER", "ADMIN").build();
 			return new InMemoryUserDetailsManager(user, admin);
 		}
-		
-		@Bean
-		public BCryptPasswordEncoder passwordEncoder() {
+
+        @Bean
+        BCryptPasswordEncoder passwordEncoder() {
 			return new BCryptPasswordEncoder();
 		}
 

@@ -43,26 +43,5 @@ public class HospitalController {
 	        }
 	    }
 	    
-	    @GetMapping("admin/api/hospital")
-	    public ResponseEntity<List<Hospital>> getAllHospital() {
-	    	
-	        List<Hospital> hospital = hospitalService.findAllHospital();
-	        if (hospital != null) {
-	            return new ResponseEntity<>(hospital, HttpStatus.OK);
-	        } else {
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	        }
-	    }
-	    
-	    @GetMapping("/api/hospitalspeciality")
-	    public ResponseEntity<List<Hospital>> getAllHospitalspeciality() {
-	    	
-	        List<Hospital> hospital = hospitalService.findAllHospital();
-	        if (hospital != null) {
-	            return new ResponseEntity<>(hospital, HttpStatus.OK);
-	        } else {
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	        }
-	    }
-	    
+	  
 }
