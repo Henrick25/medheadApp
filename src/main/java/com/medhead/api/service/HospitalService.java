@@ -25,12 +25,5 @@ public class HospitalService {
       
     }
 
-	
-    public List <Hospital> findAllHospital() {
-        // Implémentez la logique pour trouver l'hôpital le plus proche avec la spécialité requise.
-        // Ceci est un exemple simplifié.
-    	List<Hospital> hospitals = hospitalRepository.findAll();
-   
-        return hospitals;
-    }
+
 }
